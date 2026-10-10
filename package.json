@@ -1,0 +1,24 @@
+{
+  "name": "expense-tracker-pro",
+  "version": "1.0.0",
+  "description": "Full Stack MERN Expense Tracker Pro Application with Budget Alerts, Visual Charts & CSV Export",
+  "scripts": {
+    "server": "npm run dev --prefix backend",
+    "client": "npm run dev --prefix frontend",
+    "seed": "npm run seed --prefix backend",
+    "build": "npm run build --prefix frontend"
+  },
+  "keywords": [
+    "mern",
+    "expense-tracker",
+    "react",
+    "nodejs",
+    "express",
+    "mongodb",
+    "tailwind",
+    "jwt",
+    "recharts"
+  ],
+  "author": "",
+  "license": "MIT"
+}
