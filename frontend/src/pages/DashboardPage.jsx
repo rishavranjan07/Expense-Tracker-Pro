@@ -12,14 +12,13 @@ import {
   TrendingUp,
   TrendingDown,
   PiggyBank,
-  Plus,
   ArrowDownRight,
   ArrowUpRight,
 } from 'lucide-react';
 
 const DashboardPage = () => {
   const { user } = useAuth();
-  const { summary, summaryLoading, openAddModal, setIsBudgetModalOpen } =
+  const { summary, openAddModal, setIsBudgetModalOpen } =
     useTransactions();
   const navigate = useNavigate();
 
@@ -35,10 +34,10 @@ const DashboardPage = () => {
       {/* Top Welcome Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
             Hello, {user?.name || 'Explorer'} 👋
           </h1>
-          <p className="text-sm text-slate-500 mt-1">
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             Here is your financial snapshot and spending breakdown.
           </p>
         </div>
@@ -47,16 +46,16 @@ const DashboardPage = () => {
         <div className="flex items-center gap-2.5">
           <button
             onClick={() => openAddModal('income')}
-            className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 rounded-xl transition-all cursor-pointer shadow-2xs"
+            className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 border border-emerald-200/80 dark:border-emerald-800/80 rounded-xl transition-all cursor-pointer shadow-2xs"
           >
-            <ArrowUpRight className="w-4 h-4 text-emerald-600" />
+            <ArrowUpRight className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             <span>Add Income</span>
           </button>
           <button
             onClick={() => openAddModal('expense')}
-            className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200/80 rounded-xl transition-all cursor-pointer shadow-2xs"
+            className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-rose-700 dark:text-rose-300 bg-rose-50 dark:bg-rose-950/60 hover:bg-rose-100 dark:hover:bg-rose-900/60 border border-rose-200/80 dark:border-rose-800/80 rounded-xl transition-all cursor-pointer shadow-2xs"
           >
-            <ArrowDownRight className="w-4 h-4 text-rose-600" />
+            <ArrowDownRight className="w-4 h-4 text-rose-600 dark:text-rose-400" />
             <span>Add Expense</span>
           </button>
         </div>

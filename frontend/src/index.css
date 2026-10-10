@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   body {
     background-color: #f8fafc;
@@ -8,9 +10,14 @@
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
   }
+  
+  html.dark body {
+    background-color: #020617;
+    color: #f8fafc;
+  }
 }
 
-/* Custom slick scrollbar */
+/* Custom minimalist scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -24,4 +31,11 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
 }

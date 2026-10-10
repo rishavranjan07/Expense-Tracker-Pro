@@ -67,7 +67,11 @@ Manage your daily personal income and expenses, set monthly spending limits with
   - Automated calculation of equal share per roommate.
   - Clear breakdown showing who gets money back and who owes money.
 
-### 3. Security & Authentication
+### 3. Minimalist UI & Theme Customization
+- **🌓 Dark & Light Mode Toggle**: Instant 1-click switching with smooth CSS transitions, system preference detection, and `localStorage` persistence (zero-flash on load).
+- **🎨 Minimalist Clean Aesthetic**: Soft border contrasts, clean spacing, glassmorphic headers, subtle hover micro-interactions, and custom vector favicon.
+
+### 4. Security & Authentication
 - Secure JWT-based authentication with `httpOnly` authorization headers.
 - Password hashing using `bcryptjs`.
 - Protected private routes for both frontend pages and backend REST endpoints.

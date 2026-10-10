@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './context/AuthContext';
 import { TransactionProvider } from './context/TransactionContext';
+import { ThemeProvider } from './context/ThemeContext';
 
 // Components
 import Navbar from './components/Navbar';
@@ -25,9 +26,10 @@ import NotFoundPage from './pages/NotFoundPage';
 function App() {
   return (
     <Router>
-      <AuthProvider>
-        <TransactionProvider>
-          <div className="min-h-screen bg-slate-50 flex flex-col text-slate-900 antialiased selection:bg-indigo-500 selection:text-white">
+      <ThemeProvider>
+        <AuthProvider>
+          <TransactionProvider>
+            <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col text-slate-900 dark:text-slate-100 antialiased selection:bg-indigo-500 selection:text-white transition-colors duration-200">
             <Toaster
               position="top-right"
               toastOptions={{
@@ -111,7 +113,8 @@ function App() {
           </div>
         </TransactionProvider>
       </AuthProvider>
-    </Router>
+    </ThemeProvider>
+  </Router>
   );
 }
 
