@@ -6,7 +6,7 @@
     "server": "npm run dev --prefix backend",
     "client": "npm run dev --prefix frontend",
     "seed": "npm run seed --prefix backend",
-    "build": "cd frontend && npm install && npm run build"
+    "build": "cd frontend && npm install --include=dev && npm run build"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
