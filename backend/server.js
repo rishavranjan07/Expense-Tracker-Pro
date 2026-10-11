@@ -23,7 +23,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // Health check endpoint
-app.get('/api/health', (req, res) => {
+app.get(['/api/health', '/health'], (req, res) => {
   res.json({
     status: 'online',
     app: 'Expense Tracker Pro API',
@@ -37,7 +37,7 @@ const mongoose = require('mongoose');
 // Check Database Connection Health Middleware
 app.use(async (req, res, next) => {
   // Allow health check without DB
-  if (req.path === '/api/health') return next();
+  if (req.path === '/api/health' || req.path === '/health') return next();
 
   // If not connected, attempt connection
   if (mongoose.connection.readyState !== 1) {
@@ -55,10 +55,10 @@ app.use(async (req, res, next) => {
   next();
 });
 
-// Mount Routes
-app.use('/api/auth', require('./routes/authRoutes'));
-app.use('/api/transactions', require('./routes/transactionRoutes'));
-app.use('/api/groups', require('./routes/groupRoutes'));
+// Mount Routes (Supports both direct /api/... and serverless rewritten paths)
+app.use(['/api/auth', '/auth'], require('./routes/authRoutes'));
+app.use(['/api/transactions', '/transactions'], require('./routes/transactionRoutes'));
+app.use(['/api/groups', '/groups'], require('./routes/groupRoutes'));
 
 // Custom Error Handling
 app.use(notFound);
