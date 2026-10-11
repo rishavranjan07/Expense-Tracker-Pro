@@ -35,17 +35,22 @@ app.get('/api/health', (req, res) => {
 const mongoose = require('mongoose');
 
 // Check Database Connection Health Middleware
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
   // Allow health check without DB
   if (req.path === '/api/health') return next();
 
-  // 1 means connected
+  // If not connected, attempt connection
   if (mongoose.connection.readyState !== 1) {
-    return res.status(503).json({
-      success: false,
-      message:
-        'MongoDB is not connected! Please provide your MongoDB Atlas MONGO_URI in backend/.env or start local MongoDB (net start MongoDB).',
-    });
+    try {
+      await connectDB();
+    } catch (err) {
+      return res.status(503).json({
+        success: false,
+        message:
+          'MongoDB is not connected! Please verify MONGO_URI and ensure MongoDB Atlas Network Access has 0.0.0.0/0 enabled. Error: ' +
+          err.message,
+      });
+    }
   }
   next();
 });
@@ -61,18 +66,24 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-const server = app.listen(PORT, () => {
-  console.log(`
+// Only start listener if not running in serverless / Vercel environment
+if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`
 ==================================================
 🚀 Expense Tracker Pro Backend Server Running!
 📡 PORT: ${PORT}
 🌍 URL: http://localhost:${PORT}
 ⚡ Health Check: http://localhost:${PORT}/api/health
 ==================================================
-  `);
-});
+    `);
+  });
+}
 
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (err) => {
   console.error(`Unhandled Error: ${err.message}`);
 });
+
+module.exports = app;
+
